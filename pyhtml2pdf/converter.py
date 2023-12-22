@@ -22,6 +22,7 @@ def convert(
     power: int = 0,
     install_driver: bool = True,
     print_options: dict = {},
+    manual_driver = None,
 ):
     """
     Convert a given html file or website into PDF
@@ -73,7 +74,10 @@ def __get_pdf_from_html(
     webdriver_prefs["profile.default_content_settings"] = {"images": 2}
 
     if install_driver:
-        service = Service(ChromeDriverManager().install())
+        if not manual_driver:
+            service = Service(ChromeDriverManager().install())
+        else:
+            service = Service(manual_driver)
         driver = webdriver.Chrome(service=service, options=webdriver_options)
     else:
         driver = webdriver.Chrome(options=webdriver_options)
