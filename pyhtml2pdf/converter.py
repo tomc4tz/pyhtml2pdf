@@ -37,7 +37,7 @@ def convert(
     """
 
     result = __get_pdf_from_html(
-        source, timeout, install_driver, print_options)
+        source, timeout, install_driver, print_options, manual_driver)
 
     if compress:
         __compress(result, target, power)
@@ -59,7 +59,7 @@ def __send_devtools(driver, cmd, params={}):
 
 
 def __get_pdf_from_html(
-    path: str, timeout: int, install_driver: bool, print_options: dict
+    path: str, timeout: int, install_driver: bool, print_options: dict, manual_driver: str
 ):
     webdriver_options = Options()
     webdriver_prefs = {}
